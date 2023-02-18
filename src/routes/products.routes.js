@@ -5,3 +5,7 @@
 // 3. List products
 // Obtain a single product
 
+import { Router } from 'express';
+const router = Router();
+
+export default router;
