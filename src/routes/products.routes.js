@@ -5,7 +5,14 @@
 // 3. List products
 // Obtain a single product
 
-import { Router } from 'express';
+import { Router } from 'express'; 
 const router = Router();
+
+//import { createProduct, getProducts, getProductById, updateProductById, deleteProductById } from '../controllers/products.controller';
+import * as productsCtrl from '../controllers/products.controller';
+
+// When someone visits get /products I want you to use
+// certain method
+router.get('/', productsCtrl.getProducts); 
 
 export default router;
