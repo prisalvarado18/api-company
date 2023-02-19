@@ -1,10 +1,10 @@
-// Este módulo me permite tener un método de conexión 
-// llamado connect()
-// Mongoose recibe una dirección de MongoDB
+// This module allows me to have a connection method
+// called connect()
+// Mongoose receives an address from MongoDB
 import mongoose from 'mongoose';
 import { MONGODB_URI } from "./config.js";
 
-// Este método connect() recibe una dirección de MongoDB
+// This connect() method receives an address from MongoDB
 const connectDB =  () => {
     try {
          return mongoose.connect(MONGODB_URI, {

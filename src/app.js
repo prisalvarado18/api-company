@@ -9,6 +9,8 @@ const app = express();
 
 app.set('pkg', pkg);
 app.use(morgan('dev'));
+// Allow our app to understand JSON format
+app.use(express.json());
 
 // When they ask for the main path
 // I want you to respond with specific info
