@@ -6,13 +6,16 @@ export const signUp = async (req, res) => {
     // in charge to look for them
     const { username, email, password, roles } = req.body;
     // console.log(req.body);
-    new User({
-        username, 
-        email, 
-        password
+    const newUser = new User({
+        username,
+        email,
+        password: await User.encryptPassword(password)
     })
+    // console.log(newUser);
+    await newUser.save();
     res.json('signup');
 };
+
 export const signIn = async (req, res) => {
     res.json('signin');
 }; 

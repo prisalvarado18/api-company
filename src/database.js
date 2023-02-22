@@ -10,6 +10,8 @@ const connectDB =  () => {
          return mongoose.connect(MONGODB_URI, {
             useNewUrlParser: true,
             useUnifiedTopology: true,
+            // useFindAndModify: true,
+            // useCreateIndex: true,
         });
         // console.info('Connected to MongoDB');
     } catch (err) {

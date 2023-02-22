@@ -41,7 +41,9 @@ userSchema.statics.encryptPassword = async (password) => {
 // Este metodo recibe dos contrasenas
 // Un password guardado
 // Un password para comparar 
-userSchema.statics.comparePassword = async (password, receivedPassword) => {}
+userSchema.statics.comparePassword = async (password, receivedPassword) => {
+    return await bcrypt.compare(password, receivedPassword);
+}
 
 
 export default model('User', userSchema);
