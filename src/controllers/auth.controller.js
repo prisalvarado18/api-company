@@ -20,7 +20,7 @@ export const signUp = async (req, res) => {
         const foundRoles = await Role.find({ name: { $in: roles } })
         newUser.roles = foundRoles.map(role => role._id)
     } else {
-        const role = await Role.findOne({ name: 'user'});
+        const role = await Role.findOne({ name: 'user' });
         newUser.roles = [role._id];
     };
 
@@ -31,10 +31,20 @@ export const signUp = async (req, res) => {
         expiresIn: 86400 // 24 hours
     });
     // res.json('signup');
-    res.status(200).json({ token });
+    return res.status(200).json({ token });
 };
 
 export const signIn = async (req, res) => {
     // res.json('signin');
-    
+    const userFound = await User.findOne({ email: req.body.email }).populate(
+        'roles'
+    );
+    if (!userFound) return res.status(400).json({ message: 'User not found'});
+    const matchPassword = await User.comparePassword(req.body.password, userFound.password)
+    if(!matchPassword) return res.status(401).json({token: null, message: 'Invalid password'})
+    const token = jwt.sign({id: userFound._id}, SECRET, {
+        expiresIn: 86400
+    })
+    // console.log(userFound);
+    res.json({token});
 }; 
