@@ -1,4 +1,6 @@
 import User from '../models/User';
+import jwt from 'jsonwebtoken';
+import { SECRET } from '../config';
 
 export const signUp = async (req, res) => {
     // From req.body Im gonna wait for the user to send me
@@ -14,7 +16,12 @@ export const signUp = async (req, res) => {
     })
     // console.log(newUser);
     const savedUser = await newUser.save();
-    res.json('signup');
+
+    const token = jwt.sign({ id: savedUser._id }, SECRET, {
+        expiresIn: 86400 // 24 hours
+    });
+    // res.json('signup');
+    res.status(200).json({ token });
 };
 
 export const signIn = async (req, res) => {
