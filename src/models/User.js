@@ -17,7 +17,7 @@ const userSchema = new Schema ({
     roles: [{
         // Its a reference or it is related to another data model
         ref: 'Role',
-        type: Schema.Types.ObjectId
+        type: Schema.Types.ObjectId,
     }]
 }, {
     timestamps: true,
