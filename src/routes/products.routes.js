@@ -10,13 +10,13 @@ const router = Router();
 
 //import { createProduct, getProducts, getProductById, updateProductById, deleteProductById } from '../controllers/products.controller';
 import * as productsCtrl from '../controllers/products.controller';
-
+import { verifyToken } from '../middlewares';
 // When someone visits get /products I want you to use
 // certain method
-router.post('/', productsCtrl.createProduct); 
+router.post('/', verifyToken, productsCtrl.createProduct); 
 router.get('/', productsCtrl.getProducts); 
 router.get('/:productId', productsCtrl.getProductById); 
-router.put('/:productId', productsCtrl.updateProductById); 
-router.delete('/:productId', productsCtrl.deleteProductById); 
+router.put('/:productId', verifyToken, productsCtrl.updateProductById); 
+router.delete('/:productId', verifyToken, productsCtrl.deleteProductById); 
 
 export default router;
